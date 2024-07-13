@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mortgage Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .calculator {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            margin: 5px;
+            width: calc(100% - 22px);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <h2>Mortgage Calculator</h2>
+    <div>
+        <h3>Scenario 1</h3>
+        <label for="propertyValue1">Property Value:</label>
+        <input type="number" id="propertyValue1" placeholder="Enter property value"><br>
+        <label for="downPayment1">Down Payment:</label>
+        <input type="number" id="downPayment1" placeholder="Enter down payment"><br>
+        <label for="annualRate1">Annual Interest Rate (%):</label>
+        <input type="number" id="annualRate1" placeholder="Enter annual interest rate"><br>
+        <label for="term1">Mortgage Term (years):</label>
+        <input type="number" id="term1" placeholder="Enter mortgage term"><br>
+    </div>
+    <div>
+        <h3>Scenario 2</h3>
+        <label for="propertyValue2">Property Value:</label>
+        <input type="number" id="propertyValue2" placeholder="Enter property value"><br>
+        <label for="downPayment2">Down Payment:</label>
+        <input type="number" id="downPayment2" placeholder="Enter down payment"><br>
+        <label for="annualRate2">Annual Interest Rate (%):</label>
+        <input type="number" id="annualRate2" placeholder="Enter annual interest rate"><br>
+        <label for="term2">Mortgage Term (years):</label>
+        <input type="number" id="term2" placeholder="Enter mortgage term"><br>
+    </div>
+    <button onclick="calculateMortgages()">Calculate</button>
+    <div class="result">
+        <p id="result1"></p>
+        <p id="result2"></p>
+    </div>
+</div>
+
+<script>
+    function calculateMortgages() {
+        // Scenario 1
+        const propertyValue1 = document.getElementById('propertyValue1').value;
+        const downPayment1 = document.getElementById('downPayment1').value;
+        const annualRate1 = document.getElementById('annualRate1').value;
+        const term1 = document.getElementById('term1').value;
+
+        const principal1 = propertyValue1 - downPayment1;
+        const monthlyRate1 = annualRate1 / 12 / 100;
+        const numberOfPayments1 = term1 * 12;
+
+        const monthlyPayment1 = (principal1 * monthlyRate1) / (1 - Math.pow(1 + monthlyRate1, -numberOfPayments1));
+        document.getElementById('result1').innerText = 'Scenario 1 Monthly Payment: $' + monthlyPayment1.toFixed(2);
+
+        // Scenario 2
+        const propertyValue2 = document.getElementById('propertyValue2').value;
+        const downPayment2 = document.getElementById('downPayment2').value;
+        const annualRate2 = document.getElementById('annualRate2').value;
+        const term2 = document.getElementById('term2').value;
+
+        const principal2 = propertyValue2 - downPayment2;
+        const monthlyRate2 = annualRate2 / 12 / 100;
+        const numberOfPayments2 = term2 * 12;
+
+        const monthlyPayment2 = (principal2 * monthlyRate2) / (1 - Math.pow(1 + monthlyRate2, -numberOfPayments2));
+        document.getElementById('result2').innerText = 'Scenario 2 Monthly Payment: $' + monthlyPayment2.toFixed(2);
+    }
+</script>
+
+</body>
+</html>
